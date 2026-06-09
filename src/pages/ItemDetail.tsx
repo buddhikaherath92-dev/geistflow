@@ -1,9 +1,15 @@
+import { useEffect } from 'react'
 import { useParams, Link } from 'react-router-dom'
 import { getItemById } from '../lib/storage'
 
 export default function ItemDetail() {
   const { id } = useParams<{ id: string }>()
   const item = id ? getItemById(id) : undefined
+
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: 'instant' })
+    document.title = item ? `${item.title} — studio` : 'studio'
+  }, [id, item])
 
   if (!item) {
     return (
@@ -38,11 +44,9 @@ export default function ItemDetail() {
         </div>
 
         <div className="flex flex-col gap-6">
-          <div className="flex items-center gap-3">
-            <span className="text-[11px] text-white/35 tracking-widest uppercase">
-              {item.category}
-            </span>
-          </div>
+          <span className="text-[11px] text-white/35 tracking-widest uppercase">
+            {item.category}
+          </span>
 
           <div>
             <h1 className="text-white/85 text-3xl font-medium tracking-tight leading-snug mb-4">

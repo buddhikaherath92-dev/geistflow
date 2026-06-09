@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { getAllItems, getCategories } from '../lib/storage'
 import ItemCard from '../components/ItemCard'
 
@@ -8,6 +8,10 @@ export default function Home() {
   const [active, setActive] = useState<string | null>(null)
 
   const filtered = active ? items.filter((item) => item.category === active) : items
+
+  useEffect(() => {
+    document.title = 'studio'
+  }, [])
 
   return (
     <main className="max-w-6xl mx-auto px-6">
