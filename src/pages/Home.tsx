@@ -5,7 +5,7 @@ export default function Home() {
   const items = getAllItems()
 
   return (
-    <main className="min-h-screen px-6 py-16 max-w-6xl mx-auto">
+    <main className="px-6 py-16 max-w-6xl mx-auto">
       <header className="mb-12">
         <p className="text-white/25 text-xs tracking-[0.3em] uppercase mb-3">studio</p>
         <h1 className="text-white/80 text-3xl font-medium tracking-tight">Collection</h1>

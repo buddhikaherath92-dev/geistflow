@@ -7,7 +7,7 @@ export default function ItemDetail() {
 
   if (!item) {
     return (
-      <main className="min-h-screen px-6 py-16 max-w-6xl mx-auto">
+      <main className="px-6 py-16 max-w-6xl mx-auto">
         <Link
           to="/"
           className="text-white/35 text-xs tracking-widest uppercase hover:text-white/60 transition-colors"
@@ -20,7 +20,7 @@ export default function ItemDetail() {
   }
 
   return (
-    <main className="min-h-screen px-6 py-16 max-w-6xl mx-auto">
+    <main className="px-6 py-16 max-w-6xl mx-auto">
       <Link
         to="/"
         className="text-white/35 text-xs tracking-widest uppercase hover:text-white/60 transition-colors"
