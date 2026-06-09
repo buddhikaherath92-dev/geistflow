@@ -1,11 +1,16 @@
+import { Link } from 'react-router-dom'
+
 export default function Footer() {
   return (
     <footer className="border-t border-white/[0.06] px-6 h-14 flex items-center justify-between">
       <span className="text-white/20 text-xs">© {new Date().getFullYear()} Studio</span>
       <nav className="flex gap-6">
-        <span className="text-white/25 text-xs hover:text-white/50 transition-colors cursor-pointer">
+        <Link
+          to="/about"
+          className="text-white/25 text-xs hover:text-white/50 transition-colors"
+        >
           About
-        </span>
+        </Link>
         <span className="text-white/25 text-xs hover:text-white/50 transition-colors cursor-pointer">
           Contact
         </span>
