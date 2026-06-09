@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom'
 import type { Item } from '../lib/types'
 
 interface Props {
@@ -6,6 +7,7 @@ interface Props {
 
 export default function ItemCard({ item }: Props) {
   return (
+    <Link to={`/item/${item.id}`} className="block">
     <article className="bg-white/5 rounded-2xl overflow-hidden transition-colors hover:bg-white/[0.08]">
       <div className="aspect-[4/3] overflow-hidden">
         <img
@@ -29,5 +31,6 @@ export default function ItemCard({ item }: Props) {
         </div>
       </div>
     </article>
+    </Link>
   )
 }
