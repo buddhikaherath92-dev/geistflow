@@ -11,9 +11,12 @@ export default function Footer() {
         >
           About
         </Link>
-        <span className="text-white/25 text-xs hover:text-white/50 transition-colors cursor-pointer">
+        <Link
+          to="/contact"
+          className="text-white/25 text-xs hover:text-white/50 transition-colors"
+        >
           Contact
-        </span>
+        </Link>
       </nav>
     </footer>
   )
