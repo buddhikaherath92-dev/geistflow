@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+import { setPageMeta } from '../lib/meta'
 
 export default function Contact() {
   const [name, setName] = useState('')
@@ -7,7 +8,10 @@ export default function Contact() {
   const [sent, setSent] = useState(false)
 
   useEffect(() => {
-    document.title = 'Contact — studio'
+    setPageMeta({
+      title: 'Contact — studio',
+      description: 'Get in touch with a question, a wholesale inquiry, or just to say hello.',
+    })
   }, [])
 
   function handleSend() {

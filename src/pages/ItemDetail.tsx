@@ -1,6 +1,7 @@
 import { useEffect } from 'react'
 import { useParams, Link } from 'react-router-dom'
 import { getItemById } from '../lib/storage'
+import { setPageMeta } from '../lib/meta'
 
 export default function ItemDetail() {
   const { id } = useParams<{ id: string }>()
@@ -8,7 +9,10 @@ export default function ItemDetail() {
 
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: 'instant' })
-    document.title = item ? `${item.title} — studio` : 'studio'
+    setPageMeta({
+      title: item ? `${item.title} — studio` : 'studio',
+      description: item ? item.description : 'A considered collection of thoughtfully sourced objects.',
+    })
   }, [id, item])
 
   if (!item) {

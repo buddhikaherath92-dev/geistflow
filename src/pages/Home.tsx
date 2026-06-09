@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { getAllItems, getCategories } from '../lib/storage'
+import { setPageMeta } from '../lib/meta'
 import ItemCard from '../components/ItemCard'
 
 export default function Home() {
@@ -12,7 +13,10 @@ export default function Home() {
   const filtered = active ? items.filter((item) => item.category === active) : items
 
   useEffect(() => {
-    document.title = 'studio'
+    setPageMeta({
+      title: 'studio',
+      description: 'A considered collection of thoughtfully sourced objects and materials.',
+    })
   }, [])
 
   return (
