@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react'
+import { Link } from 'react-router-dom'
 import { getAllItems, getCategories } from '../lib/storage'
 import ItemCard from '../components/ItemCard'
 
@@ -7,6 +8,7 @@ export default function Home() {
   const categories = getCategories()
   const [active, setActive] = useState<string | null>(null)
 
+  const featured = items[0]
   const filtered = active ? items.filter((item) => item.category === active) : items
 
   useEffect(() => {
@@ -16,15 +18,44 @@ export default function Home() {
   return (
     <main className="max-w-6xl mx-auto px-6">
 
-      {/* Hero */}
-      <section className="py-24 md:py-32 border-b border-white/[0.06]">
-        <h1 className="text-white/85 text-5xl md:text-7xl font-medium tracking-tighter leading-none mb-5">
-          studio
-        </h1>
-        <p className="text-white/35 text-base md:text-lg tracking-wide">
-          a considered collection
-        </p>
-      </section>
+      {/* Featured hero */}
+      <Link
+        to={`/item/${featured.id}`}
+        className="group block py-12 md:py-16 border-b border-white/[0.06]"
+      >
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12">
+
+          {/* Text — stacks below image on mobile */}
+          <div className="flex flex-col gap-8 md:gap-0 md:justify-between order-last md:order-first">
+            <div>
+              <h1 className="text-white/85 text-5xl md:text-7xl font-medium tracking-tighter leading-none mb-4">
+                studio
+              </h1>
+              <p className="text-white/35 text-base tracking-wide">
+                a considered collection
+              </p>
+            </div>
+            <div>
+              <p className="text-[11px] text-white/25 tracking-widest uppercase mb-3">
+                {featured.category} — Featured
+              </p>
+              <p className="text-white/65 text-2xl md:text-3xl font-medium tracking-tight leading-snug group-hover:text-white/85 transition-colors">
+                {featured.title}
+              </p>
+            </div>
+          </div>
+
+          {/* Image — appears first on mobile */}
+          <div className="aspect-[4/3] overflow-hidden rounded-2xl order-first md:order-last">
+            <img
+              src={`https://picsum.photos/seed/${featured.id}/1200/900`}
+              alt={featured.title}
+              className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-[1.03]"
+            />
+          </div>
+
+        </div>
+      </Link>
 
       {/* Collection */}
       <section className="py-16">
