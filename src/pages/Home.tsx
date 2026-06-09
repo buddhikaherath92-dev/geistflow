@@ -33,10 +33,10 @@ export default function Home() {
           <div className="flex flex-col gap-8 md:gap-0 md:justify-between order-last md:order-first">
             <div>
               <h1 className="text-white/85 text-5xl md:text-7xl font-medium tracking-tighter leading-none mb-4">
-                studio
+                Geistflow
               </h1>
               <p className="text-white/35 text-base tracking-wide">
-                a considered collection
+                A studio for considered digital work — brand, identity, and the systems beneath them.
               </p>
             </div>
             <div>
