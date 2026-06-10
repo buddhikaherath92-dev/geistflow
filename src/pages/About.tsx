@@ -4,8 +4,8 @@ import { setPageMeta } from '../lib/meta'
 export default function About() {
   useEffect(() => {
     setPageMeta({
-      title: 'About — studio',
-      description: 'We make things worth keeping. A small studio built around considered objects and slow craft.',
+      title: 'About — Geistflow',
+      description: 'Geistflow is a home for digital work made with care — brand, identity, and the systems beneath them.',
     })
   }, [])
 
