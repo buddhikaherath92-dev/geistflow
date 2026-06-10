@@ -1,26 +1,13 @@
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 import { setPageMeta } from '../lib/meta'
 
 export default function Contact() {
-  const [name, setName] = useState('')
-  const [email, setEmail] = useState('')
-  const [message, setMessage] = useState('')
-  const [sent, setSent] = useState(false)
-
   useEffect(() => {
     setPageMeta({
-      title: 'Contact — studio',
-      description: 'Get in touch with a question, a wholesale inquiry, or just to say hello.',
+      title: 'Contact — Geistflow',
+      description: 'Get in touch by email.',
     })
   }, [])
-
-  function handleSend() {
-    if (!name.trim() || !email.trim() || !message.trim()) return
-    setSent(true)
-  }
-
-  const inputClass =
-    'w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white/75 text-sm placeholder:text-white/20 focus:outline-none focus:border-white/25 transition-colors'
 
   return (
     <main className="px-6 py-24 max-w-2xl mx-auto">
@@ -29,42 +16,14 @@ export default function Contact() {
         Get in touch.
       </h1>
       <p className="text-white/40 text-base mb-16">
-        A question about an item, a wholesale inquiry, or just to say hello — we read everything.
+        For any enquiry — work, questions, or anything else — reach out by email.
       </p>
-
-      {sent ? (
-        <p className="text-white/50 text-base">Thanks, we'll be in touch.</p>
-      ) : (
-        <div className="flex flex-col gap-4">
-          <input
-            type="text"
-            placeholder="Name"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-            className={inputClass}
-          />
-          <input
-            type="email"
-            placeholder="Email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            className={inputClass}
-          />
-          <textarea
-            placeholder="Message"
-            value={message}
-            onChange={(e) => setMessage(e.target.value)}
-            rows={5}
-            className={`${inputClass} resize-none`}
-          />
-          <button
-            onClick={handleSend}
-            className="self-start mt-2 px-6 py-2.5 bg-white/10 text-white/70 text-sm rounded-xl hover:bg-white/15 hover:text-white/85 transition-colors cursor-pointer"
-          >
-            Send
-          </button>
-        </div>
-      )}
+      <a
+        href="mailto:bpherathwork@gmail.com"
+        className="text-white/70 text-base hover:text-white/90 transition-colors"
+      >
+        bpherathwork@gmail.com
+      </a>
     </main>
   )
 }
