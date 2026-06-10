@@ -10,8 +10,8 @@ export default function ItemDetail() {
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: 'instant' })
     setPageMeta({
-      title: item ? `${item.title} — studio` : 'studio',
-      description: item ? item.description : 'A considered collection of thoughtfully sourced objects.',
+      title: item ? `${item.title} — Geistflow` : 'Geistflow',
+      description: item ? item.description : 'A home for digital work made with care — brand, identity, and the systems beneath them.',
     })
   }, [id, item])
 

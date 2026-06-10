@@ -14,8 +14,8 @@ export default function Home() {
 
   useEffect(() => {
     setPageMeta({
-      title: 'studio',
-      description: 'A considered collection of thoughtfully sourced objects and materials.',
+      title: 'Geistflow',
+      description: 'A home for digital work made with care — brand, identity, and the systems beneath them.',
     })
   }, [])
 

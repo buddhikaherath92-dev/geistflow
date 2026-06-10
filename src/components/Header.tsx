@@ -7,7 +7,7 @@ export default function Header() {
         to="/"
         className="text-white/50 text-xs tracking-[0.3em] uppercase hover:text-white/75 transition-colors"
       >
-        studio
+        Geistflow
       </Link>
     </header>
   )
