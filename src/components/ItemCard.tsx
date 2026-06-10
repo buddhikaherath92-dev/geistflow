@@ -9,10 +9,10 @@ export default function ItemCard({ item }: Props) {
   return (
     <Link
       to={`/item/${item.id}`}
-      className="block group -translate-y-0 hover:-translate-y-1 transition-transform duration-300"
+      className="block h-full group -translate-y-0 hover:-translate-y-1 transition-transform duration-300"
     >
-      <article className="bg-white/5 rounded-2xl overflow-hidden transition-colors hover:bg-white/[0.08]">
-        <div className="aspect-[4/3] overflow-hidden">
+      <article className="h-full flex flex-col bg-white/5 rounded-2xl overflow-hidden transition-colors hover:bg-white/[0.08]">
+        <div className="aspect-[4/3] overflow-hidden shrink-0">
           {item.category === 'Palettes' && item.colors?.length ? (
             <div className="flex h-full w-full">
               {item.colors.map((color) => (
@@ -27,7 +27,7 @@ export default function ItemCard({ item }: Props) {
             />
           )}
         </div>
-        <div className="p-5 flex flex-col gap-3">
+        <div className="p-5 flex flex-col gap-3 flex-1">
           <div className="flex items-center justify-between">
             <span className="text-[11px] text-white/35 tracking-widest uppercase">
               {item.category}
@@ -37,10 +37,10 @@ export default function ItemCard({ item }: Props) {
             </span>
           </div>
           <div>
-            <h2 className="text-white/85 font-medium text-base leading-snug mb-1">
+            <h2 className="text-white/85 font-medium text-base leading-snug mb-1 line-clamp-1">
               {item.title}
             </h2>
-            <p className="text-white/40 text-sm leading-relaxed">{item.description}</p>
+            <p className="text-white/40 text-sm leading-relaxed line-clamp-2">{item.description}</p>
           </div>
         </div>
       </article>
