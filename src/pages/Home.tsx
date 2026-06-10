@@ -51,11 +51,19 @@ export default function Home() {
 
           {/* Image — appears first on mobile */}
           <div className="aspect-[4/3] overflow-hidden rounded-2xl order-first md:order-last">
-            <img
-              src={`https://picsum.photos/seed/${featured.id}/1200/900`}
-              alt={featured.title}
-              className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-[1.03]"
-            />
+            {featured.category === 'Palettes' && featured.colors?.length ? (
+              <div className="flex h-full w-full">
+                {featured.colors.map((color) => (
+                  <div key={color} className="flex-1 h-full" style={{ backgroundColor: color }} />
+                ))}
+              </div>
+            ) : (
+              <img
+                src={`https://picsum.photos/seed/${featured.id}/1200/900`}
+                alt={featured.title}
+                className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-[1.03]"
+              />
+            )}
           </div>
 
         </div>

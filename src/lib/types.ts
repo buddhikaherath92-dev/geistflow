@@ -6,4 +6,5 @@ export interface Item {
   price: number
   imageUrl: string
   createdAt: Date
+  colors?: string[]
 }

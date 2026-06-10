@@ -39,13 +39,30 @@ export default function ItemDetail() {
       </Link>
 
       <div className="mt-12 grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
-        <div className="rounded-2xl overflow-hidden aspect-[4/3]">
-          <img
-            src={`https://picsum.photos/seed/${item.id}/1200/900`}
-            alt={item.title}
-            className="w-full h-full object-cover"
-          />
-        </div>
+        {item.category === 'Palettes' && item.colors?.length ? (
+          <div>
+            <div className="rounded-2xl overflow-hidden aspect-[4/3] flex">
+              {item.colors.map((color) => (
+                <div key={color} className="flex-1" style={{ backgroundColor: color }} />
+              ))}
+            </div>
+            <div className="flex mt-3">
+              {item.colors.map((color) => (
+                <span key={color} className="flex-1 text-center text-[10px] text-white/30 font-mono tracking-wide">
+                  {color}
+                </span>
+              ))}
+            </div>
+          </div>
+        ) : (
+          <div className="rounded-2xl overflow-hidden aspect-[4/3]">
+            <img
+              src={`https://picsum.photos/seed/${item.id}/1200/900`}
+              alt={item.title}
+              className="w-full h-full object-cover"
+            />
+          </div>
+        )}
 
         <div className="flex flex-col gap-6">
           <span className="text-[11px] text-white/35 tracking-widest uppercase">
@@ -59,7 +76,9 @@ export default function ItemDetail() {
             <p className="text-white/50 text-base leading-relaxed">{item.description}</p>
           </div>
 
-          <p className="text-white/80 text-2xl font-medium">${item.price}</p>
+          <p className="text-white/80 text-2xl font-medium">
+            {item.price === 0 ? 'Free' : `$${item.price}`}
+          </p>
         </div>
       </div>
     </main>

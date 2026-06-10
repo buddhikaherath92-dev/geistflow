@@ -1,12 +1,13 @@
 [
   {
     "id": "1",
-    "title": "Ceramic Pour-Over Set",
-    "description": "Handthrown stoneware dripper and carafe with a matte ash glaze.",
-    "category": "Kitchen",
-    "price": 84,
-    "imageUrl": "https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=800",
-    "createdAt": "2025-01-12"
+    "title": "Oxblood",
+    "description": "A dark, considered five-colour palette — deep wine and near-black, lifted by a warm off-white. The first Geistflow palette.",
+    "category": "Palettes",
+    "price": 0,
+    "imageUrl": "",
+    "createdAt": "2026-06-10",
+    "colors": ["#160F30", "#25002F", "#3A0000", "#190000", "#FFF9F7"]
   },
   {
     "id": "2",
