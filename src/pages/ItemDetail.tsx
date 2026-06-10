@@ -1,7 +1,39 @@
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { useParams, Link } from 'react-router-dom'
 import { getItemById } from '../lib/storage'
 import { setPageMeta } from '../lib/meta'
+
+function ColorSwatch({ color }: { color: string }) {
+  const [copied, setCopied] = useState(false)
+
+  function handleCopy() {
+    navigator.clipboard.writeText(color).then(() => {
+      setCopied(true)
+      setTimeout(() => setCopied(false), 1500)
+    })
+  }
+
+  return (
+    <div
+      className="relative flex-1 cursor-pointer group"
+      style={{ backgroundColor: color }}
+      onClick={handleCopy}
+    >
+      {/* hex label on hover */}
+      <div className="absolute inset-0 flex items-end justify-center pb-3 opacity-0 group-hover:opacity-100 transition-opacity duration-150 pointer-events-none">
+        <span className="text-[10px] font-mono tracking-wide text-white bg-black/40 px-1.5 py-0.5 rounded">
+          {color}
+        </span>
+      </div>
+      {/* copied feedback */}
+      {copied && (
+        <div className="absolute inset-0 flex items-center justify-center bg-black/25 pointer-events-none">
+          <span className="text-[11px] font-mono tracking-wide text-white">Copied</span>
+        </div>
+      )}
+    </div>
+  )
+}
 
 export default function ItemDetail() {
   const { id } = useParams<{ id: string }>()
@@ -43,7 +75,7 @@ export default function ItemDetail() {
           <div>
             <div className="rounded-2xl overflow-hidden aspect-[4/3] flex">
               {item.colors.map((color) => (
-                <div key={color} className="flex-1" style={{ backgroundColor: color }} />
+                <ColorSwatch key={color} color={color} />
               ))}
             </div>
             <div className="flex mt-3">
