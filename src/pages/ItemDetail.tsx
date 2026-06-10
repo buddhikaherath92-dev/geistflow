@@ -26,7 +26,30 @@ function mixToward(base: [number, number, number], target: [number, number, numb
   )
 }
 
-// Returns 11 values: 5 tints (lightest → least light), base, 5 shades (least dark → darkest)
+function rgbToHsl(r: number, g: number, b: number): [number, number, number] {
+  r /= 255; g /= 255; b /= 255
+  const max = Math.max(r, g, b), min = Math.min(r, g, b)
+  const l = (max + min) / 2
+  if (max === min) return [0, 0, l * 100]
+  const d = max - min
+  const s = l > 0.5 ? d / (2 - max - min) : d / (max + min)
+  let h = 0
+  switch (max) {
+    case r: h = ((g - b) / d + (g < b ? 6 : 0)) / 6; break
+    case g: h = ((b - r) / d + 2) / 6; break
+    case b: h = ((r - g) / d + 4) / 6; break
+  }
+  return [h * 360, s * 100, l * 100]
+}
+
+function hslToHex(h: number, s: number, l: number): string {
+  s /= 100; l /= 100
+  const k = (n: number) => (n + h / 30) % 12
+  const a = s * Math.min(l, 1 - l)
+  const f = (n: number) => l - a * Math.max(-1, Math.min(k(n) - 3, Math.min(9 - k(n), 1)))
+  return toHex(Math.round(f(0) * 255), Math.round(f(8) * 255), Math.round(f(4) * 255))
+}
+
 function generateShades(hex: string): string[] {
   const base = hexToRgb(hex)
   const white: [number, number, number] = [255, 255, 255]
@@ -43,6 +66,28 @@ function generateShades(hex: string): string[] {
     mixToward(base, black, 3 / 6),
     mixToward(base, black, 4 / 6),
     mixToward(base, black, 5 / 6),
+  ]
+}
+
+interface GradientDef {
+  name: string
+  stops: string[]
+}
+
+function generateGradients(hex: string): GradientDef[] {
+  const [r, g, b] = hexToRgb(hex)
+  const [h, s, l] = rgbToHsl(r, g, b)
+
+  const lighter = hslToHex(h, s, Math.min(l + 45, 92))
+  const darker  = hslToHex(h, s, Math.max(l - 15, 3))
+  const hueUp   = hslToHex((h + 30) % 360, s, l)
+  const anchor  = hslToHex((h + 150) % 360, Math.min(s * 0.7, 28), Math.max(l * 0.8, 8))
+
+  return [
+    { name: 'Dusk',     stops: [hex.toUpperCase(), lighter] },
+    { name: 'Ember',    stops: [darker, hex.toUpperCase()] },
+    { name: 'Veil',     stops: [lighter, hueUp, darker] },
+    { name: 'Undertow', stops: [hex.toUpperCase(), anchor] },
   ]
 }
 
@@ -101,6 +146,11 @@ function ShadeSwatch({ color, isBase = false }: { color: string; isBase?: boolea
           Base
         </span>
       )}
+      {isBase && (
+        <span className="absolute -bottom-5 left-1/2 -translate-x-1/2 text-[9px] font-mono text-white/25 whitespace-nowrap pointer-events-none">
+          {color}
+        </span>
+      )}
       <div className="absolute inset-0 flex items-end justify-center pb-1.5 opacity-0 group-hover:opacity-100 transition-opacity duration-150 pointer-events-none">
         <span className="text-[9px] font-mono text-white bg-black/50 px-1 py-0.5 rounded">
           {color}
@@ -118,18 +168,95 @@ function ShadeSwatch({ color, isBase = false }: { color: string; isBase?: boolea
 function ShadeRow({ baseColor }: { baseColor: string }) {
   const shades = generateShades(baseColor)
   return (
+    <div className="flex items-center gap-0.5 pt-6 pb-6">
+      {shades.map((shade, i) => (
+        <ShadeSwatch key={i} color={shade} isBase={i === 5} />
+      ))}
+    </div>
+  )
+}
+
+function GradientCard({ gradient }: { gradient: GradientDef }) {
+  const [angle, setAngle] = useState(0)
+  const [copied, setCopied] = useState(false)
+
+  const cssGradient = `linear-gradient(${angle}deg, ${gradient.stops.join(', ')})`
+
+  function handleRotate(e: React.MouseEvent) {
+    e.stopPropagation()
+    setAngle(a => (a + 90) % 360)
+  }
+
+  function handleCopy() {
+    navigator.clipboard.writeText(cssGradient).then(() => {
+      setCopied(true)
+      setTimeout(() => setCopied(false), 1500)
+    })
+  }
+
+  return (
+    <div
+      className="relative aspect-[4/3] rounded-xl cursor-pointer group overflow-hidden"
+      style={{ background: cssGradient }}
+      onClick={handleCopy}
+    >
+      {/* gradient name on hover */}
+      <div className="absolute inset-0 flex items-end p-3 opacity-0 group-hover:opacity-100 transition-opacity duration-150 pointer-events-none">
+        <span className="text-[11px] font-mono text-white/80 tracking-wide bg-black/30 px-2 py-1 rounded">
+          {gradient.name}
+        </span>
+      </div>
+
+      {/* rotate button */}
+      <button
+        className="absolute top-2 right-2 w-7 h-7 rounded-full bg-black/30 flex items-center justify-center text-white/60 hover:text-white/90 hover:bg-black/50 transition-colors opacity-0 group-hover:opacity-100 cursor-pointer text-base leading-none"
+        onClick={handleRotate}
+        title="Rotate gradient"
+      >
+        ↻
+      </button>
+
+      {/* copied feedback */}
+      {copied && (
+        <div className="absolute inset-0 flex items-center justify-center bg-black/20 pointer-events-none">
+          <span className="text-[11px] font-mono text-white tracking-wide">Copied</span>
+        </div>
+      )}
+    </div>
+  )
+}
+
+function GradientSection({ colors }: { colors: string[] }) {
+  const [activeColor, setActiveColor] = useState(colors[0])
+  const gradients = generateGradients(activeColor)
+
+  return (
     <div>
-      <span className="text-[10px] font-mono text-white/25 tracking-wide mb-4 block">
-        {baseColor.toUpperCase()}
-      </span>
-      <div className="flex items-center gap-0.5 pt-6">
-        {shades.map((shade, i) => (
-          <ShadeSwatch key={i} color={shade} isBase={i === 5} />
+      {/* colour tabs */}
+      <div className="flex gap-2 mb-8">
+        {colors.map(color => (
+          <button
+            key={color}
+            className={`w-8 h-8 rounded-lg cursor-pointer transition-all ${
+              activeColor === color
+                ? 'ring-2 ring-white/50 scale-110'
+                : 'ring-1 ring-white/10 hover:ring-white/30'
+            }`}
+            style={{ backgroundColor: color }}
+            onClick={() => setActiveColor(color)}
+            title={color}
+          />
         ))}
       </div>
-      <div className="flex justify-between mt-2">
-        <span className="text-[9px] text-white/20 font-mono">← Lighter</span>
-        <span className="text-[9px] text-white/20 font-mono">Darker →</span>
+
+      {/* gradient grid — key on activeColor so angle state resets on tab switch */}
+      <div key={activeColor} className="grid grid-cols-2 gap-4">
+        {gradients.map(gradient => (
+          <GradientCard
+            key={`${activeColor}-${gradient.name}`}
+            gradient={gradient}
+          />
+        ))}
       </div>
     </div>
   )
@@ -204,14 +331,12 @@ export default function ItemDetail() {
           <span className="text-[11px] text-white/35 tracking-widest uppercase">
             {item.category}
           </span>
-
           <div>
             <h1 className="text-white/85 text-3xl font-medium tracking-tight leading-snug mb-4">
               {item.title}
             </h1>
             <p className="text-white/50 text-base leading-relaxed">{item.description}</p>
           </div>
-
           <p className="text-white/80 text-2xl font-medium">
             {item.price === 0 ? 'Free' : `$${item.price}`}
           </p>
@@ -219,14 +344,21 @@ export default function ItemDetail() {
       </div>
 
       {isPalette && (
-        <div className="mt-20">
-          <p className="text-white/25 text-xs tracking-[0.3em] uppercase mb-10">Shades</p>
-          <div className="flex flex-col gap-12">
-            {item.colors!.map((color) => (
-              <ShadeRow key={color} baseColor={color} />
-            ))}
+        <>
+          <div className="mt-20">
+            <p className="text-white/25 text-xs tracking-[0.3em] uppercase mb-4">Shades</p>
+            <div className="flex flex-col gap-8">
+              {item.colors!.map((color) => (
+                <ShadeRow key={color} baseColor={color} />
+              ))}
+            </div>
           </div>
-        </div>
+
+          <div className="mt-20">
+            <p className="text-white/25 text-xs tracking-[0.3em] uppercase mb-8">Gradients</p>
+            <GradientSection colors={item.colors!} />
+          </div>
+        </>
       )}
     </main>
   )
