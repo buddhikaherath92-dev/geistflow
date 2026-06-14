@@ -151,11 +151,13 @@ function ShadeSwatch({ color, isBase = false }: { color: string; isBase?: boolea
           {color}
         </span>
       )}
-      <div className="absolute inset-0 flex items-end justify-center pb-1.5 opacity-0 group-hover:opacity-100 transition-opacity duration-150 pointer-events-none">
-        <span className="text-[9px] font-mono text-white bg-black/50 px-1 py-0.5 rounded">
-          {color}
-        </span>
-      </div>
+      {!copied && (
+        <div className="absolute inset-0 flex items-end justify-center pb-1.5 opacity-0 group-hover:opacity-100 transition-opacity duration-150 pointer-events-none">
+          <span className="text-[9px] font-mono text-white bg-black/50 px-1 py-0.5 rounded">
+            {color}
+          </span>
+        </div>
+      )}
       {copied && (
         <div className="absolute inset-0 flex items-center justify-center bg-black/30 rounded pointer-events-none">
           <span className="text-[9px] font-mono text-white">Copied</span>
