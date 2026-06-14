@@ -91,6 +91,14 @@ function generateGradients(hex: string): GradientDef[] {
   ]
 }
 
+const SUITABILITY: Record<string, { name: string; description: string }> = {
+  '#FFF9F7': { name: 'Honest.',      description: 'Pure and clean, but never claiming to be flawless. No one is. An honest white.' },
+  '#190000': { name: 'Still.',       description: 'A red so deep it stops being loud and becomes calm. Weight, not noise.' },
+  '#3A0000': { name: 'Regal.',       description: 'Bold, confident, premium. A quiet kind of exciting.' },
+  '#25002F': { name: 'Geist.',       description: 'The seductive creative energy — the one that makes beautiful things. Magic, channelled.' },
+  '#160F30': { name: 'Disciplined.', description: 'The navy that shows up on time, keeps it minimal, never lets you down. Leadership you don\'t have to ask for.' },
+}
+
 // --- components ---
 
 function ColorSwatch({ color }: { color: string }) {
@@ -264,6 +272,63 @@ function GradientSection({ colors }: { colors: string[] }) {
   )
 }
 
+function SuitabilitySwatch({ color }: { color: string }) {
+  const [copied, setCopied] = useState(false)
+
+  function handleCopy() {
+    navigator.clipboard.writeText(color).then(() => {
+      setCopied(true)
+      setTimeout(() => setCopied(false), 1500)
+    })
+  }
+
+  return (
+    <div
+      className="relative w-8 h-8 rounded-lg flex-shrink-0 cursor-pointer"
+      style={{ backgroundColor: color }}
+      onClick={handleCopy}
+      title={`Copy ${color}`}
+    >
+      {copied && (
+        <div className="absolute inset-0 flex items-center justify-center bg-black/30 rounded-lg pointer-events-none">
+          <span className="text-[11px] text-white">✓</span>
+        </div>
+      )}
+    </div>
+  )
+}
+
+function SuitabilitySection({ colors }: { colors: string[] }) {
+  const entries = colors
+    .map(color => ({ color, ...SUITABILITY[color.toUpperCase()] }))
+    .filter(e => e.name)
+
+  return (
+    <div>
+      <p className="text-white/45 text-sm leading-relaxed mb-10">
+        Every colour here carries a temperament.
+      </p>
+      <div className="flex flex-col gap-7">
+        {entries.map(({ color, name, description }) => (
+          <div key={color} className="flex items-start gap-4">
+            <SuitabilitySwatch color={color} />
+            <div className="flex flex-col gap-1 pt-0.5">
+              <div className="flex items-baseline gap-2.5">
+                <span className="text-[11px] font-mono text-white/30 tracking-wide">{color.toUpperCase()}</span>
+                <span className="text-sm text-white/65 font-medium">{name}</span>
+              </div>
+              <p className="text-sm text-white/40 leading-relaxed">{description}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+      <p className="mt-12 text-white/40 text-sm leading-relaxed max-w-xl">
+        Oxblood is made for a creative studio known by its work — quiet, deeply creative, but with that fire kept disciplined. Transparent, honest, considered. Not for everyone. For those with a premium eye.
+      </p>
+    </div>
+  )
+}
+
 // --- page ---
 
 export default function ItemDetail() {
@@ -359,6 +424,11 @@ export default function ItemDetail() {
           <div className="mt-20">
             <p className="text-white/25 text-xs tracking-[0.3em] uppercase mb-8">Gradients</p>
             <GradientSection colors={item.colors!} />
+          </div>
+
+          <div className="mt-20">
+            <p className="text-white/25 text-xs tracking-[0.3em] uppercase mb-8">Suitability</p>
+            <SuitabilitySection colors={item.colors!} />
           </div>
         </>
       )}
