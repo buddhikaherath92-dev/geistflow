@@ -99,6 +99,8 @@ const SUITABILITY: Record<string, { name: string; description: string }> = {
   '#160F30': { name: 'Disciplined.', description: 'The navy that shows up on time, keeps it minimal, never lets you down. Leadership you don\'t have to ask for.' },
 }
 
+const SWATCH_BORDER = 'inset 0 0 0 1px rgba(22,15,48,0.12)'
+
 // --- components ---
 
 function ColorSwatch({ color }: { color: string }) {
@@ -114,7 +116,7 @@ function ColorSwatch({ color }: { color: string }) {
   return (
     <div
       className="relative flex-1 cursor-pointer group"
-      style={{ backgroundColor: color }}
+      style={{ backgroundColor: color, boxShadow: SWATCH_BORDER }}
       onClick={handleCopy}
     >
       <div className="absolute inset-0 flex items-end justify-center pb-3 opacity-0 group-hover:opacity-100 transition-opacity duration-150 pointer-events-none">
@@ -144,18 +146,23 @@ function ShadeSwatch({ color, isBase = false }: { color: string; isBase?: boolea
   return (
     <div
       className={`relative flex-1 cursor-pointer group rounded transition-all ${
-        isBase ? 'h-14 ring-2 ring-white/40 z-10' : 'h-10'
+        isBase ? 'h-14 z-10' : 'h-10'
       }`}
-      style={{ backgroundColor: color }}
+      style={{
+        backgroundColor: color,
+        boxShadow: isBase
+          ? `0 0 0 2px rgba(22,15,48,0.22), ${SWATCH_BORDER}`
+          : SWATCH_BORDER,
+      }}
       onClick={handleCopy}
     >
       {isBase && (
-        <span className="absolute -top-5 left-1/2 -translate-x-1/2 text-[9px] font-mono text-white/35 whitespace-nowrap pointer-events-none">
+        <span className="absolute -top-5 left-1/2 -translate-x-1/2 text-[9px] font-mono text-[#160F30]/35 whitespace-nowrap pointer-events-none">
           Base
         </span>
       )}
       {isBase && (
-        <span className="absolute -bottom-5 left-1/2 -translate-x-1/2 text-[9px] font-mono text-white/25 whitespace-nowrap pointer-events-none">
+        <span className="absolute -bottom-5 left-1/2 -translate-x-1/2 text-[9px] font-mono text-[#160F30]/25 whitespace-nowrap pointer-events-none">
           {color}
         </span>
       )}
@@ -248,11 +255,14 @@ function GradientSection({ colors }: { colors: string[] }) {
           <button
             key={color}
             className={`w-8 h-8 rounded-lg cursor-pointer transition-all ${
-              activeColor === color
-                ? 'ring-2 ring-white/50 scale-110'
-                : 'ring-1 ring-white/10 hover:ring-white/30'
+              activeColor === color ? 'scale-110' : ''
             }`}
-            style={{ backgroundColor: color }}
+            style={{
+              backgroundColor: color,
+              boxShadow: activeColor === color
+                ? `0 0 0 2px rgba(22,15,48,0.3), ${SWATCH_BORDER}`
+                : SWATCH_BORDER,
+            }}
             onClick={() => setActiveColor(color)}
             title={color}
           />
@@ -285,7 +295,7 @@ function SuitabilitySwatch({ color }: { color: string }) {
   return (
     <div
       className="relative w-8 h-8 rounded-lg flex-shrink-0 cursor-pointer"
-      style={{ backgroundColor: color }}
+      style={{ backgroundColor: color, boxShadow: SWATCH_BORDER }}
       onClick={handleCopy}
       title={`Copy ${color}`}
     >
@@ -305,7 +315,7 @@ function SuitabilitySection({ colors }: { colors: string[] }) {
 
   return (
     <div>
-      <p className="text-white/45 text-sm leading-relaxed mb-10">
+      <p className="text-[#160F30]/50 text-sm leading-relaxed mb-10">
         Every colour here carries a temperament.
       </p>
       <div className="flex flex-col gap-7">
@@ -314,15 +324,15 @@ function SuitabilitySection({ colors }: { colors: string[] }) {
             <SuitabilitySwatch color={color} />
             <div className="flex flex-col gap-1 pt-0.5">
               <div className="flex items-baseline gap-2.5">
-                <span className="text-[11px] font-mono text-white/30 tracking-wide">{color.toUpperCase()}</span>
-                <span className="text-sm text-white/65 font-medium">{name}</span>
+                <span className="text-[11px] font-mono text-[#160F30]/30 tracking-wide">{color.toUpperCase()}</span>
+                <span className="text-sm text-[#160F30]/70 font-medium">{name}</span>
               </div>
-              <p className="text-sm text-white/40 leading-relaxed">{description}</p>
+              <p className="text-sm text-[#160F30]/45 leading-relaxed">{description}</p>
             </div>
           </div>
         ))}
       </div>
-      <p className="mt-12 text-white/40 text-sm leading-relaxed max-w-xl">
+      <p className="mt-12 text-[#160F30]/45 text-sm leading-relaxed max-w-xl">
         Oxblood is made for a creative studio known by its work — quiet, deeply creative, but with that fire kept disciplined. Transparent, honest, considered. Not for everyone. For those with a premium eye.
       </p>
     </div>
@@ -348,11 +358,11 @@ export default function ItemDetail() {
       <main className="px-6 py-16 max-w-6xl mx-auto">
         <Link
           to="/"
-          className="text-white/35 text-xs tracking-widest uppercase hover:text-white/60 transition-colors"
+          className="text-[#160F30]/40 text-xs tracking-widest uppercase hover:text-[#25002F] transition-colors"
         >
           ← Collection
         </Link>
-        <p className="text-white/40 mt-16 text-sm">Item not found.</p>
+        <p className="text-[#160F30]/45 mt-16 text-sm">Item not found.</p>
       </main>
     )
   }
@@ -363,7 +373,7 @@ export default function ItemDetail() {
     <main className="px-6 py-16 max-w-6xl mx-auto">
       <Link
         to="/"
-        className="text-white/35 text-xs tracking-widest uppercase hover:text-white/60 transition-colors"
+        className="text-[#160F30]/40 text-xs tracking-widest uppercase hover:text-[#25002F] transition-colors"
       >
         ← Collection
       </Link>
@@ -378,7 +388,7 @@ export default function ItemDetail() {
             </div>
             <div className="flex mt-3">
               {item.colors!.map((color) => (
-                <span key={color} className="flex-1 text-center text-[10px] text-white/30 font-mono tracking-wide">
+                <span key={color} className="flex-1 text-center text-[10px] text-[#160F30]/30 font-mono tracking-wide">
                   {color}
                 </span>
               ))}
@@ -395,16 +405,16 @@ export default function ItemDetail() {
         )}
 
         <div className="flex flex-col gap-6">
-          <span className="text-[11px] text-white/35 tracking-widest uppercase">
+          <span className="text-[11px] text-[#160F30]/35 tracking-widest uppercase">
             {item.category}
           </span>
           <div>
-            <h1 className="text-white/85 text-3xl font-medium tracking-tight leading-snug mb-4">
+            <h1 className="text-[#160F30] text-3xl font-medium tracking-tight leading-snug mb-4">
               {item.title}
             </h1>
-            <p className="text-white/50 text-base leading-relaxed">{item.description}</p>
+            <p className="text-[#160F30]/55 text-base leading-relaxed">{item.description}</p>
           </div>
-          <p className="text-white/80 text-2xl font-medium">
+          <p className="text-[#160F30]/75 text-2xl font-medium">
             {item.price === 0 ? 'Free' : `$${item.price}`}
           </p>
         </div>
@@ -413,7 +423,7 @@ export default function ItemDetail() {
       {isPalette && (
         <>
           <div className="mt-20">
-            <p className="text-white/25 text-xs tracking-[0.3em] uppercase mb-4">Shades</p>
+            <p className="text-[#160F30]/30 text-xs tracking-[0.3em] uppercase mb-4">Shades</p>
             <div className="flex flex-col gap-8">
               {item.colors!.map((color) => (
                 <ShadeRow key={color} baseColor={color} />
@@ -422,12 +432,12 @@ export default function ItemDetail() {
           </div>
 
           <div className="mt-20">
-            <p className="text-white/25 text-xs tracking-[0.3em] uppercase mb-8">Gradients</p>
+            <p className="text-[#160F30]/30 text-xs tracking-[0.3em] uppercase mb-8">Gradients</p>
             <GradientSection colors={item.colors!} />
           </div>
 
           <div className="mt-20">
-            <p className="text-white/25 text-xs tracking-[0.3em] uppercase mb-8">Suitability</p>
+            <p className="text-[#160F30]/30 text-xs tracking-[0.3em] uppercase mb-8">Suitability</p>
             <SuitabilitySection colors={item.colors!} />
           </div>
         </>

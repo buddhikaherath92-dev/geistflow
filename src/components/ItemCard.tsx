@@ -11,7 +11,7 @@ export default function ItemCard({ item }: Props) {
       to={`/item/${item.id}`}
       className="block h-full group -translate-y-0 hover:-translate-y-1 transition-transform duration-300"
     >
-      <article className="h-full flex flex-col bg-white/5 rounded-2xl overflow-hidden transition-colors hover:bg-white/[0.08]">
+      <article className="h-full flex flex-col bg-[#160F30]/[0.04] rounded-2xl overflow-hidden transition-colors hover:bg-[#160F30]/[0.07]">
         <div className="aspect-[4/3] overflow-hidden shrink-0">
           {item.category === 'Palettes' && item.colors?.length ? (
             <div className="flex h-full w-full">
@@ -29,18 +29,18 @@ export default function ItemCard({ item }: Props) {
         </div>
         <div className="p-5 flex flex-col gap-3 flex-1">
           <div className="flex items-center justify-between">
-            <span className="text-[11px] text-white/35 tracking-widest uppercase">
+            <span className="text-[11px] text-[#160F30]/35 tracking-widest uppercase">
               {item.category}
             </span>
-            <span className="text-white/75 text-sm font-medium">
+            <span className="text-[#160F30]/70 text-sm font-medium">
               {item.price === 0 ? 'Free' : `$${item.price}`}
             </span>
           </div>
           <div>
-            <h2 className="text-white/85 font-medium text-base leading-snug mb-1 line-clamp-1">
+            <h2 className="text-[#160F30]/90 font-medium text-base leading-snug mb-1 line-clamp-1">
               {item.title}
             </h2>
-            <p className="text-white/40 text-sm leading-relaxed line-clamp-2">{item.description}</p>
+            <p className="text-[#160F30]/45 text-sm leading-relaxed line-clamp-2">{item.description}</p>
           </div>
         </div>
       </article>

@@ -11,12 +11,12 @@ export default function About() {
 
   return (
     <main className="px-6 py-24 max-w-2xl mx-auto">
-      <p className="text-white/25 text-xs tracking-[0.3em] uppercase mb-6">About</p>
-      <h1 className="text-white/85 text-4xl md:text-5xl font-medium tracking-tighter leading-tight mb-16">
+      <p className="text-[#160F30]/30 text-xs tracking-[0.3em] uppercase mb-6">About</p>
+      <h1 className="text-[#160F30] text-4xl md:text-5xl font-medium tracking-tighter leading-tight mb-16">
         Geistflow
       </h1>
 
-      <div className="flex flex-col gap-8 text-white/50 text-base leading-relaxed">
+      <div className="flex flex-col gap-8 text-[#160F30]/55 text-base leading-relaxed">
         <p>
           Geistflow is a home for digital work made with care — brand, identity, and the systems
           beneath them. Every piece here carries a particular spirit: considered, intentional,

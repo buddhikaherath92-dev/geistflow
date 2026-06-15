@@ -25,25 +25,25 @@ export default function Home() {
       {/* Featured hero */}
       <Link
         to={`/item/${featured.id}`}
-        className="group block py-12 md:py-16 border-b border-white/[0.06]"
+        className="group block py-12 md:py-16 border-b border-[#160F30]/[0.07]"
       >
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12">
 
           {/* Text — stacks below image on mobile */}
           <div className="flex flex-col gap-8 md:gap-0 md:justify-between order-last md:order-first">
             <div>
-              <h1 className="text-white/85 text-5xl md:text-7xl font-medium tracking-tighter leading-none mb-4">
+              <h1 className="text-[#160F30] text-5xl md:text-7xl font-medium tracking-tighter leading-none mb-4">
                 Geistflow
               </h1>
-              <p className="text-white/35 text-base tracking-wide">
+              <p className="text-[#160F30]/40 text-base tracking-wide">
                 A studio for considered digital work — brand, identity, and the systems beneath them.
               </p>
             </div>
             <div>
-              <p className="text-[11px] text-white/25 tracking-widest uppercase mb-3">
+              <p className="text-[11px] text-[#160F30]/30 tracking-widest uppercase mb-3">
                 {featured.category} — Featured
               </p>
-              <p className="text-white/65 text-2xl md:text-3xl font-medium tracking-tight leading-snug group-hover:text-white/85 transition-colors">
+              <p className="text-[#160F30]/70 text-2xl md:text-3xl font-medium tracking-tight leading-snug group-hover:text-[#160F30]/90 transition-colors">
                 {featured.title}
               </p>
             </div>
@@ -72,14 +72,14 @@ export default function Home() {
       {/* Collection */}
       <section className="py-16">
         <header className="mb-10">
-          <p className="text-white/25 text-xs tracking-[0.3em] uppercase mb-8">Collection</p>
+          <p className="text-[#160F30]/30 text-xs tracking-[0.3em] uppercase mb-8">Collection</p>
           <div className="flex flex-wrap gap-2">
             <button
               onClick={() => setActive(null)}
               className={`px-4 py-1.5 rounded-full text-xs tracking-wide transition-colors cursor-pointer ${
                 active === null
-                  ? 'bg-white/15 text-white/85'
-                  : 'bg-white/5 text-white/35 hover:bg-white/10 hover:text-white/55'
+                  ? 'bg-[#3A0000]/[0.1] text-[#3A0000]'
+                  : 'bg-[#160F30]/[0.04] text-[#160F30]/40 hover:bg-[#160F30]/[0.08] hover:text-[#160F30]/60'
               }`}
             >
               All
@@ -90,8 +90,8 @@ export default function Home() {
                 onClick={() => setActive(cat)}
                 className={`px-4 py-1.5 rounded-full text-xs tracking-wide transition-colors cursor-pointer ${
                   active === cat
-                    ? 'bg-white/15 text-white/85'
-                    : 'bg-white/5 text-white/35 hover:bg-white/10 hover:text-white/55'
+                    ? 'bg-[#3A0000]/[0.1] text-[#3A0000]'
+                    : 'bg-[#160F30]/[0.04] text-[#160F30]/40 hover:bg-[#160F30]/[0.08] hover:text-[#160F30]/60'
                 }`}
               >
                 {cat}
