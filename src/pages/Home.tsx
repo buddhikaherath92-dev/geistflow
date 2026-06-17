@@ -146,7 +146,18 @@ export default function Home() {
       {/* ── Collection ── */}
       <div className="max-w-6xl mx-auto px-6">
         <section className="py-32">
-          <p className="text-[#160F30]/30 text-xs tracking-[0.3em] uppercase mb-10">Collection</p>
+          <div className="text-center mb-24">
+            <h2 className="text-[#160F30]/50 text-lg tracking-[0.3em] uppercase font-normal mb-5">Collection</h2>
+            <div
+              aria-hidden
+              className="mx-auto"
+              style={{
+                height: '2px',
+                width: '45%',
+                background: 'linear-gradient(to right, transparent, #3A0000 40%, #3A0000 60%, transparent)',
+              }}
+            />
+          </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
             {items.map((item) => (
               <ItemCard key={item.id} item={item} />
