@@ -1,6 +1,6 @@
-import { useState, useEffect } from 'react'
+import { useEffect } from 'react'
 import { Link } from 'react-router-dom'
-import { getAllItems, getCategories } from '../lib/storage'
+import { getAllItems } from '../lib/storage'
 import { setPageMeta } from '../lib/meta'
 import ItemCard from '../components/ItemCard'
 
@@ -29,24 +29,11 @@ const textShadow = {
   `,
 }
 
-// ─── Filter button className ──────────────────────────────────────────────────
-
-const filterBtnClass = (selected: boolean) =>
-  `px-4 py-1.5 rounded-full text-xs tracking-wide transition-colors cursor-pointer ${
-    selected
-      ? 'bg-[#3A0000]/[0.1] text-[#3A0000]'
-      : 'bg-[#160F30]/[0.04] text-[#160F30]/40 hover:bg-[#160F30]/[0.08] hover:text-[#160F30]/60'
-  }`
-
 // ─── Component ───────────────────────────────────────────────────────────────
 
 export default function Home() {
   const items = getAllItems()
-  const categories = getCategories()
-  const [active, setActive] = useState<string | null>(null)
-
   const featured = items[0]
-  const filtered = active ? items.filter((item) => item.category === active) : items
 
   useEffect(() => {
     setPageMeta({
@@ -158,22 +145,10 @@ export default function Home() {
 
       {/* ── Collection ── */}
       <div className="max-w-6xl mx-auto px-6">
-        <section className="py-16">
-          <header className="mb-10">
-            <p className="text-[#160F30]/30 text-xs tracking-[0.3em] uppercase mb-8">Collection</p>
-            <div className="flex flex-wrap gap-2">
-              <button onClick={() => setActive(null)} className={filterBtnClass(active === null)}>
-                All
-              </button>
-              {categories.map((cat) => (
-                <button key={cat} onClick={() => setActive(cat)} className={filterBtnClass(active === cat)}>
-                  {cat}
-                </button>
-              ))}
-            </div>
-          </header>
+        <section className="py-32">
+          <p className="text-[#160F30]/30 text-xs tracking-[0.3em] uppercase mb-10">Collection</p>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
-            {filtered.map((item) => (
+            {items.map((item) => (
               <ItemCard key={item.id} item={item} />
             ))}
           </div>
