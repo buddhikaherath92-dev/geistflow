@@ -4,11 +4,6 @@
   box-sizing: border-box;
 }
 
-@keyframes palette-wave {
-  0%, 100% { opacity: 0.70; }
-  12%       { opacity: 1;    }
-}
-
 
 body {
   margin: 0;

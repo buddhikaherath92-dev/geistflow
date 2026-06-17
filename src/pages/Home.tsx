@@ -4,53 +4,6 @@ import { getAllItems, getCategories } from '../lib/storage'
 import { setPageMeta } from '../lib/meta'
 import ItemCard from '../components/ItemCard'
 
-// ─── Hero gradient layers (palette-wave animates each in sequence) ───────────
-
-const gradientLayers = [
-  {
-    name: 'purple',
-    delay: '0s',
-    background: `
-      radial-gradient(ellipse 62% 88% at 5% 45%,  rgba(37,0,47,0.97) 0%, rgba(37,0,47,0.62) 42%, rgba(37,0,47,0.22) 68%, transparent 92%),
-      radial-gradient(ellipse 72% 48% at -2% -8%,  rgba(37,0,47,0.84) 0%, rgba(37,0,47,0.22) 56%, transparent 82%),
-      radial-gradient(ellipse 68% 75% at 96% 16%,  rgba(37,0,47,0.92) 0%, rgba(37,0,47,0.52) 44%, transparent 80%)
-    `,
-  },
-  {
-    name: 'air-white',
-    delay: '2.4s',
-    background: `
-      radial-gradient(ellipse 18% 26% at 8%   42%, rgba(255,249,247,0.13) 0%, transparent 65%),
-      radial-gradient(ellipse 16% 22% at 101% 46%, rgba(255,249,247,0.09) 0%, transparent 60%)
-    `,
-  },
-  {
-    name: 'maroon',
-    delay: '4.8s',
-    background: `
-      radial-gradient(ellipse 100% 115% at -10% 48%,  rgba(58,0,0,0.92) 0%, rgba(58,0,0,0.52) 42%, rgba(58,0,0,0.18) 70%, transparent 95%),
-      radial-gradient(ellipse  70%  60% at  -8% 96%,  rgba(58,0,0,0.90) 0%, rgba(58,0,0,0.40) 50%, transparent 74%),
-      radial-gradient(ellipse  75%  68% at 102%  -8%, rgba(58,0,0,0.94) 0%, rgba(58,0,0,0.58) 44%, transparent 80%),
-      radial-gradient(ellipse  70%  62% at 104% 112%, rgba(58,0,0,0.92) 0%, rgba(25,0,0,0.52) 46%, transparent 78%)
-    `,
-  },
-  {
-    name: 'deep-red',
-    delay: '7.2s',
-    background: `
-      radial-gradient(ellipse 55% 88% at 112% 50%, rgba(25,0,0,0.90) 0%, rgba(25,0,0,0.55) 46%, transparent 76%)
-    `,
-  },
-  {
-    name: 'navy',
-    delay: '9.6s',
-    background: `
-      radial-gradient(ellipse 95% 75% at   8%  78%, rgba(22,15,48,0.95) 0%, rgba(22,15,48,0.55) 44%, rgba(22,15,48,0.16) 72%, transparent 93%),
-      radial-gradient(ellipse 68% 65% at 110%  92%, rgba(22,15,48,0.94) 0%, rgba(22,15,48,0.58) 44%, transparent 78%)
-    `,
-  },
-]
-
 // ─── Text shadow styles ───────────────────────────────────────────────────────
 
 const textShadow = {
@@ -106,17 +59,14 @@ export default function Home() {
     <main>
 
       {/* ── Hero ── */}
-      <div className="relative overflow-hidden" style={{ boxShadow: '0 12px 48px rgba(22,15,48,0.32)' }}>
+      <div className="relative overflow-hidden">
 
-        {/* Palette gradient — each layer pulses in sequence */}
-        {gradientLayers.map(({ name, delay, background }) => (
-          <div
-            key={name}
-            aria-hidden
-            className="absolute inset-0 pointer-events-none"
-            style={{ background, filter: 'blur(14px)', animation: `palette-wave 12s ease-in-out ${delay} infinite both` }}
-          />
-        ))}
+        {/* Hero gradient */}
+        <div
+          aria-hidden
+          className="absolute inset-0 pointer-events-none"
+          style={{ background: 'linear-gradient(120deg, #25002F 0%, #160F30 35%, #3A0000 70%, #190000 100%)' }}
+        />
 
         <div className="relative max-w-6xl mx-auto px-6">
           <Link
