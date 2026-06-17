@@ -146,7 +146,7 @@ export default function Home() {
                 <div
                   className="absolute inset-0 pointer-events-none rounded-2xl"
                   style={{
-                    boxShadow: 'inset 0 4px 16px rgba(0,0,0,0.30), inset 0 -2px 10px rgba(0,0,0,0.18), inset 3px 0 12px rgba(0,0,0,0.22), inset -3px 0 12px rgba(0,0,0,0.22)',
+                    boxShadow: 'inset 0 3px 8px rgba(22,15,48,0.22), inset 0 -2px 6px rgba(25,0,0,0.14), inset 2px 0 7px rgba(37,0,47,0.16), inset -2px 0 7px rgba(37,0,47,0.16)',
                   }}
                 />
               </div>
