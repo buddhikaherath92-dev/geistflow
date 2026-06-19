@@ -143,17 +143,16 @@ export default function Home() {
         </div>
       </div>
 
-      {/* ── Hero / Collection seam ── */}
+      {/* ── Collection ── */}
+      <div style={{ background: 'linear-gradient(to bottom, #1A0000 0%, #3A0000 28%, #2F0020 62%, #25002F 100%)' }}>
+      {/* Seam bar — first element of the collection, reads against the dark gradient */}
       <div
         aria-hidden
         style={{
           height: '20px',
-          background: 'linear-gradient(to bottom, rgba(255,249,247,0.06) 0%, rgba(255,249,247,0.38) 50%, rgba(255,249,247,0.05) 100%)',
+          background: 'linear-gradient(to bottom, rgba(255,249,247,0.42) 0%, rgba(255,249,247,0.08) 70%, transparent 100%)',
         }}
       />
-
-      {/* ── Collection ── */}
-      <div style={{ background: 'linear-gradient(to bottom, #1A0000 0%, #3A0000 28%, #2F0020 62%, #25002F 100%)' }}>
       <div className="max-w-6xl mx-auto px-6">
         <section className="pt-32 pb-[32rem]">
           <div className="text-center mb-24">
