@@ -144,6 +144,7 @@ export default function Home() {
       </div>
 
       {/* ── Collection ── */}
+      <div style={{ background: 'linear-gradient(to bottom, #FFF9F7 0%, #FFF9F7 70%, #190000 84%, #3A0000 92%, #25002F 100%)' }}>
       <div className="max-w-6xl mx-auto px-6">
         <section className="py-32">
           <div className="text-center mb-24">
@@ -164,6 +165,7 @@ export default function Home() {
             ))}
           </div>
         </section>
+      </div>
       </div>
 
     </main>
