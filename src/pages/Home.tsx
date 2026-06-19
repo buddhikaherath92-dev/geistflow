@@ -146,7 +146,7 @@ export default function Home() {
       {/* ── Collection ── */}
       <div style={{ background: 'linear-gradient(to bottom, #FFF9F7 0%, #FFF9F7 70%, #190000 84%, #3A0000 92%, #25002F 100%)' }}>
       <div className="max-w-6xl mx-auto px-6">
-        <section className="py-32">
+        <section className="pt-32 pb-[32rem]">
           <div className="text-center mb-24">
             <h2 className="text-[#160F30]/50 text-lg tracking-[0.3em] uppercase font-normal mb-5">Collection</h2>
             <div
