@@ -144,18 +144,18 @@ export default function Home() {
       </div>
 
       {/* ── Collection ── */}
-      <div style={{ background: 'linear-gradient(to bottom, #FFF9F7 0%, #FFF9F7 70%, #190000 84%, #3A0000 92%, #25002F 100%)' }}>
+      <div style={{ background: 'linear-gradient(to bottom, #1A0000 0%, #3A0000 28%, #2F0020 62%, #25002F 100%)' }}>
       <div className="max-w-6xl mx-auto px-6">
         <section className="pt-32 pb-[32rem]">
           <div className="text-center mb-24">
-            <h2 className="text-[#160F30]/50 text-lg tracking-[0.3em] uppercase font-normal mb-5">Collection</h2>
+            <h2 className="text-[#FFF9F7]/55 text-lg tracking-[0.3em] uppercase font-normal mb-5">Collection</h2>
             <div
               aria-hidden
               className="mx-auto"
               style={{
                 height: '2px',
                 width: '45%',
-                background: 'linear-gradient(to right, transparent, #3A0000 40%, #3A0000 60%, transparent)',
+                background: 'linear-gradient(to right, transparent, rgba(255,249,247,0.28) 40%, rgba(255,249,247,0.28) 60%, transparent)',
               }}
             />
           </div>
