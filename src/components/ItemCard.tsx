@@ -11,7 +11,7 @@ export default function ItemCard({ item }: Props) {
       to={`/item/${item.id}`}
       className="block h-full group -translate-y-0 hover:-translate-y-1 transition-transform duration-300"
     >
-      <article className="h-full flex flex-col bg-[#160F30]/[0.04] rounded-2xl overflow-hidden hover:bg-[#160F30]/[0.07] shadow-[0_8px_36px_rgba(58,0,0,0.10),0_2px_8px_rgba(58,0,0,0.07),inset_0_1px_0_rgba(255,249,247,0.18)] hover:shadow-[0_16px_56px_rgba(58,0,0,0.17),0_4px_14px_rgba(58,0,0,0.10),inset_0_1px_0_rgba(255,249,247,0.18)] [transition:background-color_150ms_ease,box-shadow_280ms_ease]">
+      <article className="h-full flex flex-col bg-[#FFF9F7] rounded-2xl overflow-hidden hover:bg-[#F8F1EF] shadow-[0_8px_36px_rgba(58,0,0,0.10),0_2px_8px_rgba(58,0,0,0.07),inset_0_1px_0_rgba(255,249,247,0.18)] hover:shadow-[0_16px_56px_rgba(58,0,0,0.17),0_4px_14px_rgba(58,0,0,0.10),inset_0_1px_0_rgba(255,249,247,0.18)] [transition:background-color_150ms_ease,box-shadow_280ms_ease]">
         <div className="relative aspect-[4/3] overflow-hidden shrink-0">
           {item.category === 'Palettes' && item.colors?.length ? (
             <div className="flex h-full w-full">
